@@ -3,9 +3,14 @@
 <head>
     <script>
         function checkName() {
-            var name = document.getElementById("name");
-            name = name.value;
-            alert(name)
+            var name = document.getElementById("name").value;
+            var get = JSON.stringify({"name":name});
+            console.log(get);
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("POST", "http://localhost:8080/welcome/registration/complete", true);
+            xmlHttp.setRequestHeader('Content-type', 'application/json');
+            xmlHttp.send(get);
+            alert(xmlHttp.status+" "+xmlHttp.statusText+" "+xmlHttp.responseText);
         }
     </script>
 </head>
@@ -14,18 +19,18 @@ Welcome
 <br>
 ${registration}
 <br>
-<form action="./complete" method="get">
-    Your Name: <input type="text" id="name">
+<form action="/welcome/registration/complete" method="get" enctype="application/json">
+    Your Name: <input type="text" id="name" name="name">
+    <%--<br>--%>
+    <%--Your Second Name: <input type="text" id="secondName" name="secondName">--%>
+    <%--<br>--%>
+    <%--Your Surname: <input type="text" id="surname" name="surname">--%>
+    <%--<br>--%>
+    <%--Your Login: <input type="text" id="login" name="login">--%>
+    <%--<br>--%>
+    <%--Your Password: <input type="password" id="password" name="password">--%>
     <br>
-    Your Second Name: <input type="text" id="secondName">
-    <br>
-    Your Surname: <input type="text" id="surname">
-    <br>
-    Your Login: <input type="text" id="login">
-    <br>
-    Your Password: <input type="password" id="password">
-    <br>
-    <input type="button" onclick="checkName()">
+    <input type="button" value="REGISTER" onclick="checkName()">
 </form>
 </body>
 </html>

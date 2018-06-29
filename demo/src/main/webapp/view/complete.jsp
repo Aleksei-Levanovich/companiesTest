@@ -6,6 +6,6 @@
 <body>
 Welcome
 <br>
-${message}
+${name}
 </body>
 </html>
